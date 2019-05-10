@@ -1,0 +1,128 @@
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.shield {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    visibility: hidden;
+    height: 0px;
+    background-color: #a6a6a6;
+    z-index: 11;
+}
+
+.dialog {
+    position: absolute;
+    display: none;
+    background-color:#E7F3FF;
+	color:#000000;
+    text-align: center;
+    z-index: 12;
+    margin: 1px auto;
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+	border-bottom:1px solid #000000;
+}
+
+.dialogTitle {
+    height: 38px;
+	padding:0px;
+	font:16px bold;
+	cursor:move;
+}
+
+.innerTitle{
+	position:absolute;
+	top:-4px;
+	left:0px;
+}
+
+.dialogTitleLeft{
+	position:absolute;
+	left:-1px;
+	width:8px;
+	height: 38px;
+	background:url(images/dia_1.png) no-repeat;
+}
+
+.dialogTitleRight{
+	position:absolute;
+	width:8px;
+	height: 38px;
+	background:url(images/dia_3.png) no-repeat;
+}
+
+.dialogTitleText{
+	position:absolute;
+	left:7px;
+	font-weight:bolder;
+	background:url(images/dia_2.png) repeat-x;
+	line-height:38px;
+	height:38px;
+	text-align:left;
+	color:#ffffff;
+}
+.dialogCloseDiv{
+	position:absolute;
+	width:21px;
+	height:38px;
+	background:url(images/dia_2.png) repeat-x;
+}
+.dialogCloseUp{
+	width:21px;
+	height:8px;
+	float:left;
+	
+}
+.dialogClose {
+	/*position: absolute;*/
+    top: 0px;
+	width:21px;
+	height:21px;
+	float:right;
+    text-align: right;
+	cursor:pointer;
+	background:url(images/icon_close.gif) repeat-x;
+}
+
+.dialogClose a {
+    color: #000000;
+}
+
+.dialogContent {
+    position: relative;
+    left: 0px;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: left;
+	padding:25px 0px;
+}
+
+.dialogContent a{
+	color:#000000;
+}
+
+.alertContent{
+	padding:0px 20px;
+}
+
+.alertText{
+	text-align:center;
+	width:100%;
+	overflow-x:hidden;
+	word-wrap:break-word;
+	word-break:break-all;
+	margin-bottom:10px;
+}
+
+/** btngr��ɫ btnyew��ɫ btnblue��ɫ**/
+a.btnDialog { margin:0 3px; cursor:pointer;text-decoration: none;}
+a.btnDialog, a.btnDialog span, a.btnDialog:hover, a.btnDialog:hover span { height:24px; line-height:23px; padding-left:12px; display:inline-block; text-indent:0;}
+a.btnDialog, a.btnDialog span, a.btnDialog:hover, a.btnDialog:hover span { height:26px; line-height:25px; color:#FFF;}
+a.btnDialog, a.btnDialog span, a.btnDialog:hover, a.btnDialog:hover span { background:url(images/btn3.gif) left top no-repeat;}
+a.btnDialog span { padding:0; padding-right:12px; background-position:right top;}
+a.btnDialog:hover { color:#FFF; background-position:left bottom;text-decoration: none}
+a.btnDialog:hover span{ padding:0; padding-right:12px; background-position:right bottom;}

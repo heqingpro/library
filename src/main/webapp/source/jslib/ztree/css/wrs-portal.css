@@ -1,0 +1,153 @@
+.panel{
+	text-align:center;
+	/*margin:10px;*/
+	width:188px;
+	height:128px;
+	/*line-height:50px;*/
+	/*font-family:"华文行楷", "隶书", "宋体";*/
+	font-size:18px;
+	border: 2px solid black;
+	border-radius:5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	/*box-shadow: 10px 10px 5px #888888;*/
+	cursor:pointer;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.panel-td{
+	width:288px;
+	height:228px;
+	text-align: center;
+}
+
+.panel #title{
+	margin-top:20px;
+	font-size:26px;
+	font-weight:bold;
+}
+
+.panel #status{
+	width: 188px;
+	margin-top: 30px;
+}
+
+/*超链接的样式*/
+.panel #status a:LINK{
+	color: blue;
+	text-decoration: underline;
+}
+.panel #status a:VISITED{
+	color: blue;
+	text-decoration: underline;
+}
+.panel #status a:HOVER{
+	color: blue;
+	text-decoration: underline;
+}
+.panel #status a:ACTIVE{
+	color: blue;
+	text-decoration: underline;
+}
+
+div#add{
+	background-image:url(images/add.png);
+}
+
+#blank{
+	margin:10px;
+	width:128px;
+	height:128px;
+}
+
+.page{
+	font-size:24px; 
+	font-weight:bolder;
+}
+
+#appcontainer{
+	margin: auto;
+}
+
+img{vertical-align:middle;}
+
+/*针对分页的样式*/
+.search-background {
+	display: none;
+	font-size: 13px;
+	font-weight: bold;
+	height:160px;
+	position: absolute;
+	padding-top:140px;
+	text-align: center;
+	opacity:0.5;filter: alpha(opacity=50) ;
+	text-decoration: none;
+	width: 520px;
+	color:#FFFFFF;
+	text-shadow: #fff 0px 0px 20px;
+	}
+	
+search-background label{	
+
+	border:solid #66FF00 1px;
+}	
+
+#paging_button ul{ width: 510px; padding:0px; margin:8px; }
+
+#paging_button ul li { 
+
+	-moz-border-radius: 3px 3px 3px 3px;
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    float: left;
+    font-family: helvetica,arial,sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0 2px 0px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none;
+	list-style-type:none; 
+    width: 20px;cursor:pointer;
+	}
+	
+#paging_button ul li:hover{background:#006699;}
+li:hover{ color: #CC0000; cursor: pointer; }
+
+/*首页分页插件的样式*/
+.swControls{
+	position:absolute;
+	margin-top:10px;
+}
+
+a.swShowPage{
+
+	/* The links that initiate the page slide */
+
+	background-color:#444444;
+	float:left;
+	height:15px;
+	margin:4px 3px;
+	text-indent:-9999px;
+	width:15px;
+	/*border:1px solid #ccc;*/
+	
+	/* CSS3 rounded corners */
+	
+	-moz-border-radius:7px;
+	-webkit-border-radius:7px;
+	border-radius:7px;
+}
+
+a.swShowPage:hover,
+a.swShowPage.active{
+	background-color:#2993dd;
+	
+	/*	CSS3 inner shadow */
+	
+	-moz-box-shadow:0 0 7px #1e435d inset;
+	/*-webkit-box-shadow:0 0 7px #1e435d inset;*/
+	box-shadow:0 0 7px #1e435d inset;
+}

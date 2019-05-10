@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/context
+				http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- Spring  通过它spring容器会自动把上下文环境对象调用ApplicationContextAware接口中的setApplicationContext方法。
+	我们在ApplicationContextAware的实现类中，就可以通过这个上下文环境对象得到Spring容器中的Bean -->
+	<bean id="springContext" class="com.ipanel.webapp.framework.core.SpringContextAware"></bean>
+	<!-- 配置redis 客户端 -->
+	<!-- 方法1 -->
+	<!-- <bean id="JedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="localhost"></property>
+		<property name="port" value="6379"></property>
+	</bean>
+	
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="JedisConnectionFactory"></property>
+	</bean> -->
+	
+	<!-- 方法2 -->
+	<bean id="masterPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxActive" value="300" />
+		<property name="maxIdle" value="100" />
+		<property name="maxWait" value="1000" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true"/>
+	</bean>
+	
+	<!-- slave\u6769\u70b4\u5e34\u59f9\u72b2\u5f2c\u93c1\ufffd -->
+	<!-- <bean id="slavePoolConfig" class="redis.clients.jedis.JedisPoolConfig"> 
+		<property name="maxActive" value="50"/> <property name="maxIdle" value="20"/> 
+		<property name="maxWait" value="1000"/> </bean> -->
+	
+	<!-- 连接池管理jedis客户端-->
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" ref="masterPoolConfig" />
+		<constructor-arg index="1" value="192.168.18.52" />
+		<constructor-arg index="2" value="6379" type="int" />
+	</bean>
+	<!-- 从机地址 -->  
+	<!--
+	<bean id="shardInfo-0" class="redis.clients.jedis.JedisShardInfo">  
+		<constructor-arg index="0" value="10.60.30.27" />  
+		<constructor-arg index="1" value="6378" type="int"/>    
+	</bean>  
+	<bean id="shardInfo-1" class="redis.clients.jedis.JedisShardInfo">  
+		<constructor-arg index="0" value="10.60.30.27" />  
+		<constructor-arg index="1" value="6378" type="int"/>    
+	</bean>  
+	<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">  
+		<constructor-arg index="0" ref="slavePoolConfig"/>  
+		<constructor-arg index="1">  
+			<list>  
+				<ref bean="shardInfo-0"/>  
+				<ref bean="shardInfo-1"/>  
+			</list>  
+		</constructor-arg>  
+	</bean>  -->
+</beans>

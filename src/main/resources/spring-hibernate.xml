@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+">
+	<context:component-scan base-package="com.ipanel.web">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>${ds.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${ds.url}</value>
+		</property>
+		<property name="username">
+			<value>${ds.userName}</value>
+		</property>
+		<property name="password">
+			<value>${ds.password}</value>
+		</property>
+		<property name="maxActive">
+			<value>${ds.maxActive}</value>
+		</property>
+		<property name="maxWait">
+			<value>${ds.maxWait}</value>
+		</property>
+		<property name="defaultAutoCommit">
+			<value>${ds.defaultAutoCommit}</value>
+		</property>
+		<property name="validationQuery">
+			<value>SELECT 1</value>
+		</property>
+		<property name="testWhileIdle">
+			<value>true</value>
+		</property>
+		<property name="timeBetweenEvictionRunsMillis">
+			<value>3600000</value>
+		</property>
+		<property name="minEvictableIdleTimeMillis">
+			<value>18000000</value>
+		</property>
+		<property name="testOnBorrow">
+			<value>false</value>
+		</property>
+	</bean>
+
+
+	<!-- 配置hibernate session工厂 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<!-- 设置编码方式为utf-8 -->  
+				<prop key="hibernate.connection.characterEncoding">${hibernate.connection.characterEncoding}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+			</props>
+		</property>
+		<!-- 自动扫描注解方式配置的hibernate类文件 -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.ipanel.web.entity</value>
+			</list>
+		</property>
+		<!-- 上面的扫描包的方式不起作用，还是使用这种方式吧 -->
+		<property name="annotatedClasses">
+            <list>
+                <value>com.ipanel.web.book.elasticsearch.EsEntry</value>
+            </list>
+		</property>
+	</bean>
+	
+
+	<!-- 配置事务管理器 -->
+	<bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- 注解方式配置事物 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<tx:annotation-driven transaction-manager="txManager" proxy-target-class="true" />
+
+	<!-- 拦截器方式配置事物 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="merge*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="query*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="clear*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="process*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="up*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="down*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="replace*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="modify*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="edit*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="get*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="import*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="quick*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="set*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="unBind*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="bind*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="release*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="unrelease*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="change*" propagation="REQUIRED" rollback-for="Exception"/>
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="search*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="datagrid*" propagation="REQUIRED" read-only="true" />
+
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.ipanel.web..service..*.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+	</aop:config>
+	
+	<!-- 配置jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>

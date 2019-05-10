@@ -1,0 +1,19 @@
+/** btngr»ÒÉ« btnyew»ÆÉ« btnblueÀ¶É«**/
+a.btngr, a.btnyew,a.btnblue { margin:0 3px; cursor:pointer;text-decoration: none;}
+a.btngr, a.btnyew{color:#000}
+
+a.btngr, a.btngr span, a.btngr:hover, a.btngr:hover span,
+a.btnyew, a.btnyew span, a.btnyew:hover, a.btnyew:hover span,
+a.btnblue, a.btnblue span, a.btnblue:hover, a.btnblue:hover span { height:24px; line-height:23px; padding-left:12px; display:inline-block; text-indent:0;}
+a.btnblue, a.btnblue span, a.btnblue:hover, a.btnblue:hover span { height:26px; line-height:25px; color:#FFF;}
+
+a.btngr, a.btngr span, a.btngr:hover, a.btngr:hover span { background:url(images/btn1.gif) left top no-repeat;}
+a.btnyew, a.btnyew span, a.btnyew:hover, a.btnyew:hover span { background:url(images/btn2.gif) left top no-repeat;}
+a.btnblue, a.btnblue span, a.btnblue:hover, a.btnblue:hover span { background:url(images/btn3.gif) left top no-repeat;}
+
+a.btngr span, a.btnyew span, a.btnblue span { padding:0; padding-right:12px; background-position:right top;}
+
+a.btngr:hover, a.btnyew:hover {text-decoration:none; color:#000; background-position:left bottom;}
+a.btnblue:hover { color:#FFF; background-position:left bottom;text-decoration: none}
+
+a.btngr:hover span, a.btnyew:hover span , a.btnblue:hover span{ padding:0; padding-right:12px; background-position:right bottom;}
